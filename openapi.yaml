@@ -1,0 +1,80 @@
+
+
+openapi: 3.0.0
+info:
+  title: 1.1 - OpenAPI 3.0
+  description: |
+    STD22020
+  version: 1.0.11
+servers:
+  - url: https://STD22020.com
+paths:
+  /students:
+    get:
+      summary: Retrieve status information
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      summary: Update status information
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StatusRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    StatusResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Nantenaina
+        Birthday:
+          type: string
+          format: date
+          example: "1998-05-05"
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Internet several error"
+    StatusRequest:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        Birthday:
+          type: string
+          format: date
+
