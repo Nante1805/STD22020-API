@@ -11,7 +11,7 @@ servers:
 paths:
   /students:
     get:
-      summary: Retrieve status information
+      summary: Retrieve status information for students
       responses:
         '200':
           description: Successful response
@@ -26,7 +26,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
     post:
-      summary: Update status information
+      summary: Update status information for students
       requestBody:
         required: true
         content:
@@ -46,6 +46,75 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+    put:
+      summary: Update student information
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      summary: Delete student information
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /teachers:
+    get:
+      summary: Retrieve teacher information
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeacherResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      summary: Create teacher information
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeacherRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeacherResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
 components:
   schemas:
     StatusResponse:
@@ -61,12 +130,54 @@ components:
           type: string
           format: date
           example: "1998-05-05"
+
+    TeacherResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Doe
+        courses1:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+                example: "données1"
+              name:
+                type: string
+                example: "Base de données relationnelles"
+              duration:
+                type: integer
+                example: 50
+        courses2:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+                example: "WEB1"
+              name:
+                type: string
+                example: "Developpement WEB"
+              duration:
+                type: integer
+                example: 70 heures
     ErrorResponse:
       type: object
       properties:
         error:
           type: string
           example: "Internet several error"
+
     StatusRequest:
       type: object
       properties:
@@ -78,3 +189,21 @@ components:
           type: string
           format: date
 
+    TeacherRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        courses:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              name:
+                type: string
+              duration:
+                type: integer
