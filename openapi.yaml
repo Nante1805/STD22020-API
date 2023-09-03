@@ -76,7 +76,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-
   /teachers:
     get:
       summary: Retrieve teacher information
@@ -114,7 +113,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-
 components:
   schemas:
     StatusResponse:
