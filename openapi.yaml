@@ -137,10 +137,10 @@ components:
           example: 1
         firstName:
           type: string
-          example: John
+          example: Tokimahery
         lastName:
           type: string
-          example: Doe
+          example: Ramarozaka
         courses1:
           type: array
           items:
